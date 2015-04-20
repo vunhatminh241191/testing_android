@@ -1,0 +1,6 @@
+# Ignore file
+*.pyc
+env/
+*.db
+
+
