@@ -57,5 +57,3 @@ def not_found(error):
 def bad_request(error):
 	return make_response(jsonify({'error':'Bad Request'}), 400)
 
-if __name__ == '__main__':
-	app.run(debug=True)
