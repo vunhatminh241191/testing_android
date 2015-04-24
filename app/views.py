@@ -39,10 +39,16 @@ def post_accounts():
 		signup_date = request.json.get('signup_date')
 		email = request.json.get('email')
 
+		account = Account.query.filter_by(username=username).first()
+
 		if username is None or password is None:
 			abort(400) # missing arguments
-		if Account.query.filter_by(username=username).first() is not None:
-			abort(400) # existing users
+		if account is not None:
+			if verify_password(username, password) == True:
+				return "Login Success"
+			else:
+				return "Username or password is not correct"
+			
 		user = Account(username=username, signup_date=signup_date, email=email)
 		user.hash_password(password)
 		db.session.add(user)
@@ -57,3 +63,8 @@ def not_found(error):
 def bad_request(error):
 	return make_response(jsonify({'error':'Bad Request'}), 400)
 
+def verify_password(username, password):
+    user = Account.query.filter_by(username = username).first()
+    if not user or not user.verify_password(password):
+        return False
+    return True

@@ -7,6 +7,7 @@ class Account(db.Model):
 	username = db.Column(db.String(120), unique=True)
 	password = db.Column(db.String(128))
 	signup_date = db.Column(db.DateTime)
+	facebook_id = db.Column(db.String(128), unique=True)
 	email = db.Column(db.String(120), unique=True)
 
 	def hash_password(self, password):
