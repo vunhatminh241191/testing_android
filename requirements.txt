@@ -4,6 +4,7 @@ Flask==0.10.1
 Flask-HTTPAuth==2.4.0
 Flask-Mandrill==0.2
 Flask-SQLAlchemy==2.0
+gunicorn==19.3.0
 itsdangerous==0.24
 Jinja2==2.7.3
 mandrill==1.0.57
