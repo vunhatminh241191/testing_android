@@ -4,7 +4,7 @@ from flask.ext.httpauth import HTTPBasicAuth
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
-app.config.from_pyfile('config.py')
+app.config.from_object('config')
 db = SQLAlchemy(app)
 
 from app import views, models
