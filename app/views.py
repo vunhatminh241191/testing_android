@@ -1,5 +1,5 @@
 from app import app, db
-from flask import request, jsonify, make_response, abort, g
+from flask import request, jsonify, make_response, abort
 from models import Account
 import datetime
 import mandrill
@@ -47,7 +47,7 @@ def post_accounts():
 		if username is None or password is None:
 			abort(400) # missing arguments
 		if account is not None:
-			return login(account)
+			return login(account, username, password)
 		else:
 			return signup(username, password, email, facebook_id)
 
@@ -67,16 +67,15 @@ def bad_request(error):
 	return make_response(jsonify({'error':'Bad Request'}), 400)
 
 def verify_password(username, password):
+	print password
 	user = Account.query.filter_by(username = username).first()
 	if not user or not user.verify_password(password):
 		return False
 	return True
 
-def login(account):
-	if verify_password(account.username, account.password) == True:
-		message = get_account(account.id)
-		message.update({'message':'Login Success'})
-		return message
+def login(account, username, password):
+	if verify_password(username, password) == True:
+		return "Login Success"
 	else:
 		return "Username or password is not correct"
 
