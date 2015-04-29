@@ -67,7 +67,6 @@ def bad_request(error):
 	return make_response(jsonify({'error':'Bad Request'}), 400)
 
 def verify_password(username, password):
-	print password
 	user = Account.query.filter_by(username = username).first()
 	if not user or not user.verify_password(password):
 		return False
