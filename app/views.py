@@ -80,7 +80,7 @@ def login(account, username, password):
 
 def signup(username, password, email, facebook_id):
 	user = Account(username=username
-		,signup_date=datetime.date.today().strftime("%Y-%m-%d")
+		,signup_date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 		,email=email, facebook_id=facebook_id)
 	user.hash_password(password)
 	db.session.add(user)
